@@ -8,7 +8,6 @@
 #include "HistoryModel.hpp"
 #include "AccountInfoProvider.hpp"
 #include "Settings.hpp"
-#include "ObjectiveClass.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -24,18 +23,27 @@ int main(int argc, char *argv[])
 	AccountModel accountModel;
 	QObject::connect(&accountInfoProvider, &ingonline::AccountInfoProvider::balanceDataUpdated,
 					 &accountModel, &AccountModel::replaceWith);
+	try
+	{
+		HistoryModel historyModel;
+		QObject::connect(&accountInfoProvider, &ingonline::AccountInfoProvider::historyDataUpdated,
+						 &historyModel, &HistoryModel::replaceWith);
 
-	HistoryModel historyModel;
-	QObject::connect(&accountInfoProvider, &ingonline::AccountInfoProvider::historyDataUpdated,
-					 &historyModel, &HistoryModel::replaceWith);
+		viewer.rootContext()->setContextProperty("accountInfoProvider", &accountInfoProvider);
+		viewer.rootContext()->setContextProperty("accountModel", &accountModel);
+		viewer.rootContext()->setContextProperty("historyModel", &historyModel);
+		viewer.rootContext()->setContextProperty("settings", &settings);
 
-	viewer.rootContext()->setContextProperty("accountInfoProvider", &accountInfoProvider);
-	viewer.rootContext()->setContextProperty("accountModel", &accountModel);
-	viewer.rootContext()->setContextProperty("historyModel", &historyModel);
-	viewer.rootContext()->setContextProperty("settings", &settings);
+		viewer.setMainQmlFile(QStringLiteral("qml/main.qml"));
+		viewer.showExpanded();
 
-	viewer.setMainQmlFile(QStringLiteral("qml/main.qml"));
-	viewer.showExpanded();
+		return app.exec();
+	}
+	catch (const std::runtime_error& e)
+	{
+		qCritical() << e.what();
+		return 1;
+	}
 
-    return app.exec();
+	return 0;
 }

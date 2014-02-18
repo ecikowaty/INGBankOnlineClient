@@ -14,6 +14,11 @@ Settings::Settings(QObject *parent)
 {
 }
 
+Settings::~Settings()
+{
+	delete &d;
+}
+
 QString Settings::login() const
 {
 	return settings.value("login", "").toString();
@@ -30,6 +35,20 @@ void Settings::setPassword(const QString& password)
 	{
 		d.password = password;
 		emit passwordChanged();
+	}
+}
+
+QString Settings::account() const
+{
+	return settings.value("account", "").toString();
+}
+
+void Settings::setAccount(const QString& account)
+{
+	if (settings.value("account").toString() != account)
+	{
+		settings.setValue("account", account);
+		emit accountChanged();
 	}
 }
 

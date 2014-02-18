@@ -1,4 +1,7 @@
 #include <QDebug>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
 
 #include "HistoryModel.hpp"
 #include "HistoryEntry.hpp"
@@ -6,6 +9,16 @@
 HistoryModel::HistoryModel(QObject *parent)
 	: QAbstractListModel(parent)
 {
+	if (QSqlDatabase::connectionNames().isEmpty())
+	{
+		QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+		db.setDatabaseName("history.sqlite");
+
+		if (!db.open())
+		{
+			throw std::runtime_error("Can't open database.");
+		}
+	}
 }
 
 void HistoryModel::addEntry(const QString& date, const QString& amount, const QString& description)

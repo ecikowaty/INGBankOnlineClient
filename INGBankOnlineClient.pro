@@ -8,10 +8,10 @@ QML_IMPORT_PATH =
 
 CONFIG += c++11
 
-ICON = ing.icns
-
-QT += network webkitwidgets xml
+QT += network webkitwidgets xml sql
 QT -= gui
+
+ICON = ing.icns
 
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += \
@@ -31,16 +31,6 @@ HEADERS += \
     AccountModel.hpp \
     HistoryModel.hpp \
     HistoryEntry.hpp
-
-mac {
-    HEADERS += \
-        ObjectiveClass.hpp
-
-    OBJECTIVE_SOURCES += \
-        ObjectiveClass.mm
-
-    LIBS += -framework AppKit
-}
 
 # Installation path
 # target.path =

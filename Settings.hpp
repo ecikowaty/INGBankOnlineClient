@@ -9,14 +9,17 @@ class Settings : public QObject
 
 	Q_PROPERTY(QString login READ login WRITE setLogin NOTIFY loginChanged)
 	Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
+	Q_PROPERTY(QString account READ account WRITE setAccount NOTIFY accountChanged)
 	Q_PROPERTY(int refreshInterval READ refreshInterval WRITE setRefreshInterval NOTIFY refreshIntervalChanged)
 
 public:
 	explicit Settings(QObject *parent = 0);
+	~Settings();
 
 signals:
 	void loginChanged();
 	void passwordChanged();
+	void accountChanged();
 	void refreshIntervalChanged();
 
 public:
@@ -25,6 +28,9 @@ public:
 
 	QString password() const;
 	void setPassword(const QString& password);
+
+	QString account() const;
+	void setAccount(const QString& account);
 
 	int refreshInterval() const;
 	void setRefreshInterval(int interval);

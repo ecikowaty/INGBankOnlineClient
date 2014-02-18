@@ -21,8 +21,6 @@ namespace ingonline
 
 	namespace
 	{
-		const QString ACCOUNT_NUMBER = "82105015591000009041544249";
-
 		const QString BALANCE_PAGE = "https://online.ingbank.pl/mobi/account/accountInfo.html?new=true";
 
 		const QString HISTORY_PAGE = "https://online.ingbank.pl/mobi/account/transhistory.html?new=true";
@@ -125,7 +123,7 @@ namespace ingonline
 		networkManager->get(request);
 	}
 
-	void AccountInfoProvider::getHistory()
+	void AccountInfoProvider::getHistory(const QString& accountNumber)
 	{
 		emit statusInfo("Downloading account history");
 
@@ -135,7 +133,7 @@ namespace ingonline
 		request.setHeader(QNetworkRequest::CookieHeader, cookie);
 
 		QUrlQuery postData;
-		postData.addQueryItem("account", ACCOUNT_NUMBER);
+		postData.addQueryItem("account", accountNumber);
 		postData.addQueryItem("accountValue", "KONTO Direct; 0,00 PLN");
 		postData.addQueryItem("step", "next");
 		postData.addQueryItem("action:transhistory", "");

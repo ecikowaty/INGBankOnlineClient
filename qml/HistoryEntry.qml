@@ -34,8 +34,8 @@ Item {
 
 					DropShadowText {
 						anchors.centerIn: parent
-						text: entry.date
-						textColor: "orange"
+						text: entry.amount
+						textColor: text.indexOf("-") >= 0 ? "#ff2600" : "#79aa43"
 					}
 				}
 
@@ -47,8 +47,8 @@ Item {
 
 					DropShadowText {
 						anchors.centerIn: parent
-						text: entry.amount
-						textColor: text.indexOf("-") >= 0 ? "#ff2600" : "#79aa43"
+						text: entry.date
+						textColor: "orange"
 					}
 				}
 			}

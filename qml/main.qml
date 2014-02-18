@@ -120,7 +120,7 @@ Rectangle {
 	Connections {
 		target: accountInfoProvider
 		onLoginSuccessfull: accountInfoProvider.getBalance()
-		onBalanceDataUpdated: accountInfoProvider.getHistory()
+		onBalanceDataUpdated: accountInfoProvider.getHistory(settings.account)
 	}
 
 	Connections {

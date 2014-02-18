@@ -8,8 +8,6 @@
 #include <QtNetwork/QNetworkReply>
 #include <QScopedPointer>
 
-class QStateMachine;
-
 namespace ingonline
 {
 	enum LoginState
@@ -37,7 +35,7 @@ namespace ingonline
 //		void logout();
 
 		void getBalance();
-		void getHistory();
+		void getHistory(const QString& accountNumber);
 		void onHttpReply(QNetworkReply* reply);
 		void onHttpError(QNetworkReply::NetworkError error);
 

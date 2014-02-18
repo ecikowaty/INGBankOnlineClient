@@ -35,6 +35,8 @@ Rectangle {
 			id: input
 			anchors { fill: parent; margins: 4 }
 			verticalAlignment: TextInput.AlignVCenter
+			clip: true
+
 			color: "#ff7514"
 			font.bold: true
 			font.family: "Lucida Grande"

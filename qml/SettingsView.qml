@@ -59,6 +59,15 @@ Item {
 			}
 
 			FormInput {
+				id: historyAccount
+				anchors.horizontalCenter: parent.horizontalCenter
+				text: "Account"
+				inputText: settings.account
+
+				Keys.onPressed: if (event.key === Qt.Key_Tab) switchFocusTo(refreshInterval)
+			}
+
+			FormInput {
 				id: refreshInterval
 				anchors.horizontalCenter: parent.horizontalCenter
 				text: "Refresh"
@@ -93,6 +102,7 @@ Item {
 				settings.login = username.inputText
 				settings.password = password.inputText
 				settings.refreshInterval = refreshInterval.inputText
+				settings.account = historyAccount.inputText
 			}
 		}
 	}
